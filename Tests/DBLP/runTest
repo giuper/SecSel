@@ -1,0 +1,37 @@
+#!/bin/bash
+
+tableName="10K"
+keyName="17Col.key"
+queryName="queryAut"
+tokenName="tokenAut"
+tokenResults="ptokResults"
+
+
+#remove old encrypted tables
+rm -f ${tableName}.msg ${tableName}.ct
+
+date
+echo -n "Generating keys..."
+../../GenKey 17 ${keyName}
+date
+
+date
+echo -n "Encrypting table..."
+../../EncRow ${keyName} ${tableName}.txt ${tableName} 1000 8 
+date
+
+date
+echo -n "Generating tokens..."
+../../GenToken ${keyName} ${queryName} ${tokenName} 1000
+date
+
+date
+echo -n "Applying predicate token..."
+../../miracl/ApplyPToken ${tokenName} 100K ${tokenResults} 8
+date
+
+date
+echo -n "Applying message token..."
+../../miracl/ApplyMToken ${tokenName} 100K ${tokenResults} 8
+date
+
