@@ -1,4 +1,3 @@
-
 CXXFLAGS=-g
 CXXFLAGS= -std=gnu++11 -D_REENTRANT
 BNOBJB=  bn_pair.o  zzn2.o zzn12a.o       zzn4.o ecn2.o big.o zzn.o ecn.o base64.o oe-m.o aoe-m.o
