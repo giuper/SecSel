@@ -52,3 +52,6 @@ all: ${EXE}
 
 clean:
 	rm -f ${BNOBJB} ${EXE} GenKey.o EncRow.o GenToken.o ApplyToken.o ApplyPToken.o ApplyMToken.o
+
+
+
