@@ -12,24 +12,6 @@
 #include <queue> 
 
 
-//int
-//SecureSelect::getMilliCount()
-//{
-	//timeb tb;
-	//ftime(&tb);
-	//int nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
-	//return nCount;
-//}
-//
-//int
-//SecureSelect::getMilliSpan(int nTimeStart)
-//{
-	//int nSpan = getMilliCount() - nTimeStart;
-	//if(nSpan < 0)
-		//nSpan += 0x100000 * 1000;
-	//return nSpan;
-//}
-
 OEMsk **
 AOE::Setup()
 {
@@ -806,9 +788,8 @@ SecureSelect::create_query_attribute(string fname)
 	fstream inputFile(fname);
 	string line;
 
-	/** The first line contains colum numbers to select (already loaded) */
+	/** The first line contains column numbers to select (already loaded) */
 	getline(inputFile,line);
-
 	hash<string> hash_fn;
 	size_t str_hash;
 	/** These are the 'where' parameters */
@@ -969,17 +950,8 @@ SecureSelect::GenToken(string query_name, string tokfile, int rand_lim)
 	OEKey *pkey;
 	OEKey **mkey;
 
-	#ifdef VERBOSE
-	int start = getMilliCount();
-	#endif
-
 	/* Predicate key generation */
 	pkey = aoen->PKeyGen(msks,Y,rand_lim);
-
-	#ifdef VERBOSE
-	int milliSecondsElapsed = getMilliSpan(start);
-	cout << "\tPredicate key generation time: " << milliSecondsElapsed << endl;
-	#endif
 
 	/* Message keys generation */
 	int j;
@@ -991,17 +963,8 @@ SecureSelect::GenToken(string query_name, string tokfile, int rand_lim)
 		}
 	}
 	
-	#ifdef VERBOSE
-	start = getMilliCount();
-	#endif
-	
 	mkey = aoen->MKeyGen(msks,Y,sel_params,0);
 	
-	#ifdef VERBOSE
-	milliSecondsElapsed = getMilliSpan(start);
-	cout << "\tMessage keys generation time: " << milliSecondsElapsed << endl;
-	#endif
-
 	string ptok_file = tokfile+".ptk";
 	string mtok_file = tokfile+".mtk";
 

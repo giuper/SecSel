@@ -78,18 +78,7 @@ The following is a typical workflow:
 
     Queries for an n-column table are encoded for the **GenToken** command in the following way:
 
-    Query that shows r columns c1,c2,...,cr for rows such that 
-    columni=wi for i=1,...,n (where wi is either a string or a don't care symbol) are encoded by 
-    file whose first line contains
-	c1#c2#...#cr  
-    and subsequent lines contain wi or is empty, if wi is a don't care symbol.
-    Examples are in files 'query_8' and 'query_120'.
+    The first line is the column that the message token will decrypt
 
+    Each of the successive n lines is either empty (corresponding to a don't care) or a string wi, encoding the fact that only rows with i-th column equal to wi are to be selected.
 
-#### **Noise parameter**
-
-
-* 
-	Random noise is added to ciphertexts during encryption (one per each row) and to tokens during token generation (one per each select parameter of the query).
-    If a token and an encrypted row have the same noise then the query has success even if the rows would not have been selected by the query.
-The noise parameter denotes the size of the interval from which  the random noise is picked.
