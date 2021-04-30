@@ -6,26 +6,7 @@
 
 #include "pairing_3.h"
 #include "aoe-m.h"
-
-#include <sys/timeb.h>
-
-#define VERBOSE
-
-#ifdef AAA
-int getMilliCount(){
-	timeb tb;
-	ftime(&tb);
-	int nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
-	return nCount;
-}
-
-int getMilliSpan(int nTimeStart){
-	int nSpan = getMilliCount() - nTimeStart;
-	if(nSpan < 0)
-		nSpan += 0x100000 * 1000;
-	return nSpan;
-}
-#endif
+#include "getTime.h"
 
 int
 main(int argc, char *argv[]){
@@ -47,11 +28,12 @@ main(int argc, char *argv[]){
 
 	db = new SecureSelect(m,&pfc,pfc.order());
 	#ifdef VERBOSE
-	int start = getMilliCount();
+	start = getMilliCount();
 	#endif
 	db->KeyGen(key_name);
 	#ifdef VERBOSE
-	int milliSecondsElapsed = getMilliSpan(start);
-	cout << "\texec time " << milliSecondsElapsed << endl;
+	milliSecondsElapsed = getMilliSpan(start);
+	cout << "\texec time " << milliSecondsElapsed.count()<< endl;
+	cout << endl;
 	#endif
 }

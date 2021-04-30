@@ -4,8 +4,6 @@
 #include "pairing_3.h"
 #include "oe-m.h"
 
-int getMilliCount();
-int getMilliSpan(int nTimeStart);
 
 /**
  * \brief The amortized orthogonal encryption class.

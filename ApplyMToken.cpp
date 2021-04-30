@@ -6,8 +6,8 @@
 
 #include "pairing_3.h"
 #include "aoe-m.h"
+#include "getTime.h"
 
-#define VERBOSE
 
 int
 main(int argc, char *argv[]){
@@ -48,13 +48,14 @@ main(int argc, char *argv[]){
 	}
 
 	#ifdef VERBOSE
-	int start = getMilliCount();
+	start = getMilliCount();
 	#endif
 	vector<string> query_results = db->ApplyMTokenMT(query_name, enctable_name, results_name, num_threads);
 //	vector<string> query_results = db->ApplyMToken(query_name, enctable_name, results_name);
 	#ifdef VERBOSE
-	int milliSecondsElapsed = getMilliSpan(start);
-	cout << "\texec time " << milliSecondsElapsed << endl;
+	milliSecondsElapsed = getMilliSpan(start);
+	cout << "\texec time " << milliSecondsElapsed.count()<< endl;
+	cout << endl;
 	#endif
 
 	if(query_results.size()==0){

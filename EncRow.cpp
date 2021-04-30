@@ -6,9 +6,8 @@
 
 #include "pairing_3.h"
 #include "aoe-m.h"
+#include "getTime.h"
 
-
-#define VERBOSE
 
 int
 main(int argc, char *argv[]){
@@ -45,13 +44,13 @@ main(int argc, char *argv[]){
 	}
 
 	#ifdef VERBOSE
-	int start = getMilliCount();
+	start = getMilliCount();
 	#endif
 	db->EncryptRowsMT(table_name,enctable_name,rand_lim, num_threads);
-//	db->EncryptRows(table_name,enctable_name,rand_lim);
 	#ifdef VERBOSE
-	int milliSecondsElapsed = getMilliSpan(start);
-	cout << "\texec time " << milliSecondsElapsed << endl;
+	milliSecondsElapsed = getMilliSpan(start);
+	cout << "\texec time " << milliSecondsElapsed.count()<< endl;
+	cout << endl;
 	#endif
 
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tableName="1K"
+tableName="3Lines"
 keyName="17Col.key"
 queryName="queryAut"
 tokenName="tokenAut"
@@ -19,14 +19,14 @@ date
 echo
 
 date
-echo -n "Encrypting table..."
-../../EncRow ${keyName} ${tableName}.txt ${tableName} 1000 16 
+echo -n "Generating tokens..."
+../../GenToken ${keyName} ${queryName} ${tokenName} 1000
 date
 echo
 
 date
-echo -n "Generating tokens..."
-../../GenToken ${keyName} ${queryName} ${tokenName} 1000
+echo -n "Encrypting table..."
+../../EncRow ${keyName} ${tableName}.txt ${tableName} 1000 16 
 date
 echo
 
